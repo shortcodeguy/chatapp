@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Rohit's Crazy Coding World</title>
+<style>
+  body {
+    margin: 0;
+    padding: 0;
+    font-family: 'Comic Sans MS', sans-serif;
+    background: linear-gradient(120deg, #ff9a9e, #fad0c4, #fbc2eb);
+    overflow: hidden;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+  h1 {
+    font-size: 3em;
+    cursor: pointer;
+    transition: all 0.3s ease;
+  }
+  .button {
+    padding: 15px 25px;
+    margin: 10px;
+    font-size: 1.2em;
+    cursor: pointer;
+    border-radius: 10px;
+    border: none;
+    background: #fff;
+    transition: all 0.3s ease;
+  }
+  .button:hover {
+    background: #fffa;
+    transform: scale(1.1);
+  }
+  #messages {
+    margin-top: 20px;
+    font-size: 1.2em;
+    color: #fff;
+    text-shadow: 1px 1px 2px #000;
+  }
+  .emoji {
+    position: absolute;
+    font-size: 2em;
+    pointer-events: none;
+    animation: float 2s ease-out forwards;
+  }
+  @keyframes float {
+    0% {transform: translateY(0);}
+    100% {transform: translateY(-200px); opacity: 0;}
+  }
+</style>
+</head>
+<body>
+
+<h1 id="header">Rohit's Crazy Coding World</h1>
+
+<div>
+  <button class="button" onclick="hackSimulator()">Hack Simulator</button>
+  <button class="button" onclick="emojiRain()">Emoji Rain</button>
+  <button class="button" onclick="funMessage()">Secret Fun</button>
+</div>
+
+<div id="messages"></div>
+
+<script>
+const header = document.getElementById('header');
+header.addEventListener('mouseover', () => {
+    header.style.color = `hsl(${Math.random()*360}, 100%, 50%)`;
+});
+
+function hackSimulator() {
+    const messages = ["you are hacked now 😎", "system breach 😝", "access denied 🔒", "code overload 💥"];
+    const msg = messages[Math.floor(Math.random() * messages.length)];
+    const msgDiv = document.getElementById('messages');
+    msgDiv.textContent = msg;
+}
+
+function emojiRain() {
+    const emojis = ['🎉','✨','🔥','💻','😎','🚀'];
+    for(let i=0; i<10; i++) {
+        const emoji = document.createElement('div');
+        emoji.textContent = emojis[Math.floor(Math.random()*emojis.length)];
+        emoji.className = 'emoji';
+        emoji.style.left = Math.random()*window.innerWidth + 'px';
+        emoji.style.top = window.innerHeight + 'px';
+        document.body.appendChild(emoji);
+        setTimeout(() => emoji.remove(), 2000);
+    }
+}
+
+function funMessage() {
+    const messages = ["Keep coding! 💪", "Debug like a boss 🕵️‍♂️", "Rohit rules! 😎", "Coffee break? ☕"];
+    const msg = messages[Math.floor(Math.random() * messages.length)];
+    const msgDiv = document.getElementById('messages');
+    msgDiv.textContent = msg;
+}
+
+// Floating shapes in background
+for(let i=0; i<30; i++){
+    const shape = document.createElement('div');
+    shape.style.width = shape.style.height = Math.random()*20+10+'px';
+    shape.style.background = `hsla(${Math.random()*360}, 100%, 50%, 0.5)`;
+    shape.style.position = 'absolute';
+    shape.style.borderRadius = '50%';
+    shape.style.top = Math.random()*window.innerHeight+'px';
+    shape.style.left = Math.random()*window.innerWidth+'px';
+    shape.style.animation = `floatShape ${5 + Math.random()*5}s linear infinite`;
+    document.body.appendChild(shape);
+}
+
+const style = document.createElement('style');
+style.innerHTML = `
+@keyframes floatShape {
+    0% {transform: translateY(0);}
+    100% {transform: translateY(-100vh);}
+}`;
+document.head.appendChild(style);
+</script>
+
+</body>
+</html>
